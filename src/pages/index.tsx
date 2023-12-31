@@ -4,7 +4,7 @@ import { SignedOut, SignedIn, SignInButton, SignOutButton } from "@clerk/nextjs"
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
+  const { data } = api.post.getAll.useQuery();
   
   return (
     <>
@@ -23,6 +23,12 @@ export default function Home() {
           <SignOutButton />
           <p>This content is private. Only signed in users can see the SignOutButton above this text.</p>
         </SignedIn>
+
+        <div>
+          {data?.map((post) => (
+            <div key={post.id}>{post.content}</div>
+          ))}
+        </div>
       </main>
     </>
   );
