@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { SignedOut, SignedIn, SignInButton, SignOutButton } from "@clerk/clerk-react"
+import { SignedOut, SignedIn, SignInButton, SignOutButton } from "@clerk/nextjs"
 
 import { api } from "~/utils/api";
 
