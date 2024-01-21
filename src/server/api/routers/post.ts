@@ -40,7 +40,7 @@ export const postRouter = createTRPCRouter({
     return posts.map((post) => {
       const author = users.find((user) => user.id === post.authorId);
 
-      if (!author || !author.username)
+      if (!author?.username)
         throw new TRPCError({
           code: "INTERNAL_SERVER_ERROR",
           message: "Author for post not found",
@@ -57,7 +57,7 @@ export const postRouter = createTRPCRouter({
   }),
 
   create: privateProcedure
-    .input(z.object({ content: z.string().emoji().min(1).max(280) }))
+    .input(z.object({ content: z.string().emoji("Only emojis are allowed").min(1).max(280) }))
     .mutation(async ({ctx, input}) => {
       const authorId = ctx.userId;
 
